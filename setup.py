@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-
-from Cython.Build import cythonize
-from Cython.Distutils import Extension
 import distutils.core
 import os
 from os import path
@@ -15,20 +12,32 @@ else:
     # If you're not using virtualenv, set your include dir here.
     pass
 
-exts = [
-    Extension('murmurhash.mrmr', ["murmurhash/mrmr.pyx", "murmurhash/MurmurHash2.cpp",
+
+
+try:
+    from Cython.Build import cythonize
+    from Cython.Distutils import Extension
+
+    cythonize(exts = [
+        Extension('murmurhash.mrmr', ["murmurhash/mrmr.pyx", "murmurhash/MurmurHash2.cpp",
               "murmurhash/MurmurHash3.cpp"], language="c++", include_dirs=includes),
-]
+    ])
+except ImportError:
+    from distutils.extension import Extension
+    exts = [
+        Extension('murmurhash.mrmr', ["murmurhash/mrmr.cpp", "murmurhash/MurmurHash2.cpp",
+              "murmurhash/MurmurHash3.cpp"], language="c++", include_dirs=includes),
+    ]
 
 
 distutils.core.setup(
     name='murmurhash',
     packages=['murmurhash'],
-    package_data={'murmurhash': ['*.h', '*.pxd']},
+    package_data={'murmurhash': ['*.pyx', '*.h', '*.pxd']},
     author='Matthew Honnibal',
     author_email='honnibal@gmail.com',
-    version='0.17',
-    ext_modules=cythonize(exts),
+    version='0.18',
+    ext_modules=exts,
     classifiers=[
                 'Development Status :: 4 - Beta',
                 'Environment :: Console',
