@@ -6,13 +6,6 @@ from glob import glob
 
 
 includes = ['murmurhash/']
-if 'VIRTUAL_ENV' in os.environ:
-    includes += glob(path.join(os.environ['VIRTUAL_ENV'], 'include', 'site', '*'))
-    includes += glob(path.join(os.environ['VIRTUAL_ENV'], 'include', '*'))
-else:
-    # If you're not using virtualenv, set your include dir here.
-    pass
-
 
 
 try:
@@ -37,7 +30,7 @@ setuptools.setup(
     package_data={'murmurhash': ['*.pyx', '*.h', '*.pxd']},
     author='Matthew Honnibal',
     author_email='honnibal@gmail.com',
-    version='0.20',
+    version='0.22',
     ext_modules=exts,
     classifiers=[
                 'Development Status :: 4 - Beta',
