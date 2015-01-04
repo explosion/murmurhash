@@ -40,7 +40,7 @@ setuptools.setup(
     package_data={'murmurhash': ['*.pyx', 'headers/murmurhash/*.h', '*.pxd']},
     author='Matthew Honnibal',
     author_email='honnibal@gmail.com',
-    version='0.23',
+    version='0.24',
     ext_modules=exts,
     classifiers=[
                 'Development Status :: 4 - Beta',
