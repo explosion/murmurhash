@@ -2,10 +2,20 @@
 import setuptools
 import os
 from os import path
+import sys
 from glob import glob
+import shutil
+
+def install_headers():
+    dest_dir = path.join(sys.prefix, 'include', 'murmurhash')
+    if not path.exists(dest_dir):
+        shutil.copytree('murmurhash/headers/murmurhash', dest_dir)
 
 
-includes = ['murmurhash/']
+install_headers()
+
+
+includes = ['.', path.join(sys.prefix, 'include')]
 
 
 try:
@@ -27,10 +37,10 @@ except ImportError:
 setuptools.setup(
     name='murmurhash',
     packages=['murmurhash'],
-    package_data={'murmurhash': ['*.pyx', '*.h', '*.pxd']},
+    package_data={'murmurhash': ['*.pyx', 'headers/murmurhash/*.h', '*.pxd']},
     author='Matthew Honnibal',
     author_email='honnibal@gmail.com',
-    version='0.22',
+    version='0.23',
     ext_modules=exts,
     classifiers=[
                 'Development Status :: 4 - Beta',
@@ -39,5 +49,4 @@ setuptools.setup(
                 'Intended Audience :: Science/Research',
                 'Programming Language :: Cython',
                 'Topic :: Scientific/Engineering'],
-    headers=["murmurhash/MurmurHash2.h", "murmurhash/MurmurHash3.h"]
 )
