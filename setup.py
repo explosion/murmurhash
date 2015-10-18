@@ -18,10 +18,9 @@ def install_headers():
         shutil.copytree('murmurhash/headers/murmurhash', dest_dir)
 
 def rm_cflag(text):
-    cflags = distutils.sysconfig.get_config_var('CFLAGS')
-    if cflags is not None:
-        cflags = cflags.replace(text, '')
-        distutils.sysconfig._config_vars['CFLAGS'] = cflags
+    cflags = distutils.sysconfig._config_vars['CFLAGS']
+    cflags = cflags.replace(text, '')
+    distutils.sysconfig._config_vars['CFLAGS'] = cflags
 
 install_headers()
 includes = ['.', path.join(sys.prefix, 'include')]
