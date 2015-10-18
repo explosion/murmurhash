@@ -12,7 +12,6 @@ import shutil
 
 distutils.sysconfig.get_config_vars()
 
-
 def install_headers():
     dest_dir = path.join(sys.prefix, 'include', 'murmurhash')
     if not path.exists(dest_dir):
