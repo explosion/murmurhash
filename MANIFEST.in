@@ -1,0 +1,7 @@
+recursive-include murmurhash *.py
+recursive-include murmurhash *.pyx
+recursive-include murmurhash *.pxd
+recursive-include murmurhash *.h
+recursive-include includes/
+*.py
+*.rst
