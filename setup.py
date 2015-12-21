@@ -186,7 +186,9 @@ def setup_package():
         setup(
             name='murmurhash',
             packages=PACKAGES,
-            package_data={'murmurhash': ['headers/murmurhash/*.h']},
+            package_data={'murmurhash': ['*.pyx',
+                                         '*.pxd',
+                                         'headers/murmurhash/*.h']},
             description='Cython bindings for MurmurHash2',
             author='Matthew Honnibal',
             author_email='matt@spacy.io',
