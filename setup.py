@@ -20,7 +20,7 @@ ISRELEASED = True
 VERSION    = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
 
 
-PACKAGES = ['murmurhash']
+PACKAGES = ['murmurhash', 'murmurhash.tests']
 MOD_NAMES = ['murmurhash.mrmr']
 
 
