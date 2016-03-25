@@ -3,7 +3,7 @@
 # https://python-packaging-user-guide.readthedocs.org/en/latest/single_source_version/
 # https://github.com/pypa/warehouse/blob/master/warehouse/__about__.py
 
-__name__ = 'murmurhash'
+__title__ = 'murmurhash'
 __version__ = '0.26.1'
 __summary__ = 'Cython bindings for MurmurHash2'
 __uri__ = 'https://github.com/spacy-io/cython-murmurhash'
