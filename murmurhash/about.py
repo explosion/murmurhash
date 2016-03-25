@@ -6,8 +6,7 @@
 __title__ = 'murmurhash'
 __version__ = '0.26.1'
 __summary__ = 'Cython bindings for MurmurHash2'
-__uri__ = 'https://github.com/spacy-io/cython-murmurhash'
+__uri__ = 'https://github.com/spacy-io/murmurhash'
 __author__ = 'Matthew Honnibal'
 __email__ = 'matt@spacy.io'
 __license__ = 'MIT'
-__release__ = True
