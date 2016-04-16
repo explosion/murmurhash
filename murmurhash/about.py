@@ -4,7 +4,7 @@
 # https://github.com/pypa/warehouse/blob/master/warehouse/__about__.py
 
 __title__ = 'murmurhash'
-__version__ = '0.26.2'
+__version__ = '0.26.3'
 __summary__ = 'Cython bindings for MurmurHash2'
 __uri__ = 'https://github.com/spacy-io/murmurhash'
 __author__ = 'Matthew Honnibal'

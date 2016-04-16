@@ -97,7 +97,7 @@ def setup_package():
 
         include_dirs = [
             get_python_inc(plat_specific=True),
-            os.path.join(root, 'include')]
+            os.path.join(root, 'murmurhash', 'include')]
 
         ext_modules = []
         for mod_name in MOD_NAMES:
@@ -115,7 +115,7 @@ def setup_package():
             name=about['__title__'],
             zip_safe=True,
             packages=PACKAGES,
-            package_data={'': ['*.pyx', '*.pxd']},
+            package_data={'': ['*.pyx', '*.pxd', 'include/murmurhash/*.h']},
             description=about['__summary__'],
             long_description=readme,
             author=about['__author__'],
