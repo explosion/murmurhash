@@ -1,4 +1,5 @@
 import os
+from .about import *
 
 
 def get_include():
