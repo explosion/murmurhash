@@ -127,7 +127,7 @@ def setup_package():
             license=about['__license__'],
             ext_modules=ext_modules,
             classifiers=[
-                'Development Status :: 4 - Beta',
+                'Development Status :: 5 - Production/Stable',
                 'Environment :: Console',
                 'Intended Audience :: Developers',
                 'Intended Audience :: Science/Research',
