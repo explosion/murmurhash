@@ -32,3 +32,19 @@ cdef void hash128_x86(const void* key, int length, uint32_t seed, void* out) nog
 
 cdef void hash128_x64(const void* key, int length, uint32_t seed, void* out) nogil:
     MurmurHash3_x64_128(key, length, seed, out)
+
+
+cpdef int32_t hash(value, uint32_t seed=0):
+    if isinstance(value, unicode):
+        return hash_unicode(value, seed=seed)
+    else:
+        return hash_bytes(value, seed=seed)
+
+
+cpdef int32_t hash_unicode(unicode value, uint32_t seed=0):
+    return hash_bytes(value.encode('utf8'), seed=seed)
+
+
+cpdef int32_t hash_bytes(bytes value, uint32_t seed=0):
+    cdef char* chars = <char*>value
+    return hash32(chars, len(value), seed)
