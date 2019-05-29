@@ -124,7 +124,7 @@ def setup_package():
             generate_cython(root, "murmurhash")
 
         setup(
-            name=about["__title__"],
+            name="murmurhash",
             zip_safe=False,
             packages=PACKAGES,
             package_data={"": ["*.pyx", "*.pxd", "include/murmurhash/*.h"]},
