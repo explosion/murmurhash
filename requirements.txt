@@ -1,3 +1,2 @@
 cython>=0.23
 pytest
-mmh3 # Only for testing
