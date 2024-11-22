@@ -2,14 +2,13 @@
 from __future__ import print_function
 
 import os
-import subprocess
 import sys
 import contextlib
 
 from setuptools import Extension, setup
-from distutils.command.build_ext import build_ext
-from distutils.sysconfig import get_python_inc
-from distutils import ccompiler, msvccompiler
+from setuptools.command.build_ext import build_ext
+from sysconfig import get_path
+from Cython.Build import cythonize
 
 
 PACKAGES = ["murmurhash", "murmurhash.tests"]
@@ -43,19 +42,6 @@ class build_ext_subclass(build_ext, build_ext_options):
     def build_extensions(self):
         build_ext_options.build_options(self)
         build_ext.build_extensions(self)
-
-
-def generate_cython(root, source):
-    print("Cythonizing sources")
-    p = subprocess.call(
-        [sys.executable, os.path.join(root, "bin", "cythonize.py"), source]
-    )
-    if p != 0:
-        raise RuntimeError("Running cythonize failed")
-
-
-def is_source_release(path):
-    return os.path.exists(os.path.join(path, "PKG-INFO"))
 
 
 def clean(path):
@@ -94,19 +80,13 @@ def setup_package():
             readme = f.read()
 
         include_dirs = [
-            get_python_inc(plat_specific=True),
+            get_path("include"),
             os.path.join(root, "murmurhash", "include"),
         ]
 
-        if (
-            ccompiler.new_compiler().compiler_type == "msvc"
-            and msvccompiler.get_build_version() == 9
-        ):
-            include_dirs.append(os.path.join(root, "include", "msvc9"))
-
         ext_modules = []
         for mod_name in MOD_NAMES:
-            mod_path = mod_name.replace(".", "/") + ".cpp"
+            mod_path = mod_name.replace(".", "/") + ".pyx"
             ext_modules.append(
                 Extension(
                     mod_name,
@@ -119,9 +99,6 @@ def setup_package():
                     include_dirs=include_dirs,
                 )
             )
-
-        if not is_source_release(root):
-            generate_cython(root, "murmurhash")
 
         setup(
             name="murmurhash",
@@ -136,8 +113,8 @@ def setup_package():
             version=about["__version__"],
             url=about["__uri__"],
             license=about["__license__"],
-            ext_modules=ext_modules,
-            setup_requires=["cython>=0.25"],
+            ext_modules=cythonize(ext_modules, language_level=2),
+            python_requires=">=3.6",
             classifiers=[
                 "Development Status :: 5 - Production/Stable",
                 "Environment :: Console",
@@ -148,15 +125,13 @@ def setup_package():
                 "Operating System :: MacOS :: MacOS X",
                 "Operating System :: Microsoft :: Windows",
                 "Programming Language :: Cython",
-                "Programming Language :: Python :: 2.6",
-                "Programming Language :: Python :: 2.7",
-                "Programming Language :: Python :: 3.3",
-                "Programming Language :: Python :: 3.4",
-                "Programming Language :: Python :: 3.5",
                 "Programming Language :: Python :: 3.6",
                 "Programming Language :: Python :: 3.7",
                 "Programming Language :: Python :: 3.8",
                 "Programming Language :: Python :: 3.9",
+                "Programming Language :: Python :: 3.10",
+                "Programming Language :: Python :: 3.11",
+                "Programming Language :: Python :: 3.12",
                 "Topic :: Scientific/Engineering",
             ],
             cmdclass={"build_ext": build_ext_subclass},
