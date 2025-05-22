@@ -114,7 +114,7 @@ def setup_package():
             url=about["__uri__"],
             license=about["__license__"],
             ext_modules=cythonize(ext_modules, language_level=2),
-            python_requires=">=3.6",
+            python_requires=">=3.6,<3.14",
             classifiers=[
                 "Development Status :: 5 - Production/Stable",
                 "Environment :: Console",
