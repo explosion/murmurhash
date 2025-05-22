@@ -1,5 +1,5 @@
 __title__ = "murmurhash"
-__version__ = "1.0.12"
+__version__ = "1.0.13"
 __summary__ = "Cython bindings for MurmurHash"
 __uri__ = "https://github.com/explosion/murmurhash"
 __author__ = "Explosion"
