@@ -1,2 +1,3 @@
-cython>=0.23
+cython>=3.1
 pytest
+pytest-run-parallel
